@@ -1,6 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 
-from pages.ProductsPage import ProductsPage
+from pages.HomePage import HomePage
 from utilities.BaseClass import BaseClass
 
 
@@ -31,7 +31,7 @@ class LoginPage(BaseClass):
         self.type_user(usuario)
         self.type_password(password)
         self.tap_login_btn()
-        return ProductsPage(self.driver)
+        return HomePage(self.driver)
 
     def get_error_msg_text(self):
         return self.find(LoginPage.dataIncorrectMsg).text
