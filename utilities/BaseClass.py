@@ -9,15 +9,15 @@ class BaseClass:
     # Constructor de la clase base
     def __init__(self, driver):
         self.driver = driver
-        self._wait = WebDriverWait(self, driver, 10)
+        # self._wait = WebDriverWait(self, driver, 10)
 
     # Esperamos a que un elemento este presente
     def wait_for_element(self, locator):
-        return self._wait.until(EC.presence_of_element_located(locator))
+        return EC.presence_of_element_located(locator)
 
     # Esperamos a que un elemento este visible
     def wait_for_element_to_be_visible(self, locator):
-        return self._wait.until(EC.visibility_of_element_located(locator))
+        return EC.visibility_of_element_located(locator)
 
     # Buscamos y retornamos un elemento
     def find(self, locator):

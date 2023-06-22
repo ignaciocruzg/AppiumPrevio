@@ -10,24 +10,15 @@ def driver():
         "platformName": "Android",
         "platformVersion": "13",
         "appium:deviceName": "56295fdf",
-        "appium:automationName": "UiAutomator2",
         "appium:appPackage": "com.swaglabsmobileapp",
         "appium:appActivity": "com.swaglabsmobileapp.MainActivity"
     }
 
     url = "http://localhost:4723/wd/hub"
     # Creacion de driver y sele pasan las capabilities
+    wait_seconds = 5
     driver = webdriver.Remote(url, desired_cap)
+    driver.implicitly_wait(wait_seconds)
     yield driver
     # Cerrar driver
     driver.quit()
-
-
-@pytest.fixture(scope="module")
-def appium_start():
-    appium_service = AppiumService()
-    # Iniciar servicio appium
-    appium_service.start()
-    yield
-    # Detener servicio appium
-    appium_service.stop()

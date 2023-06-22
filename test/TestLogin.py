@@ -1,9 +1,9 @@
 import pytest
 from pages.LoginPage import LoginPage
+from conftest import driver
 
 
-@pytest.mark.usefixtures("appium_start")
-class MyTestCase:
+class TestLogin:
 
     def test_login_success(self, driver):
         login_page = LoginPage(driver)
