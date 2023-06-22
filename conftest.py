@@ -8,13 +8,14 @@ def driver():
     # Asignacion de capabilities
     desired_cap = {
         "platformName": "Android",
+        "platformVersion": "9",
         "appium:deviceName": "emulator-5554",
-        "appium:automationName": "uiautomator2",
+        "appium:automationName": "UiAutomator2",
         "appium:appPackage": "com.swaglabsmobileapp",
         "appium:appActivity": "com.swaglabsmobileapp.MainActivity"
     }
 
-    url = "http://localhost:4723/wd/hub"
+    url = "http://0.0.0.0:4723/wd/hub"
     # Creacion de driver y sele pasan las capabilities
     driver = webdriver.Remote(url, desired_cap)
     yield driver

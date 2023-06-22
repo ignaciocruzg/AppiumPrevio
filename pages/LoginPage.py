@@ -1,33 +1,37 @@
 from appium.webdriver.common.appiumby import AppiumBy
+
+from pages.ProductsPage import ProductsPage
 from utilities.BaseClass import BaseClass
 
 
 class LoginPage(BaseClass):
 
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.userTextBox = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Usuario")
-        self.passwordTextBox = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Contraseña")
-        self.loginBtn = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-LOGIN")
-        self.dataIncorrectMsg = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Error")
+    # Declaracion de componentes a utilizar
+    userTextBox = (AppiumBy.ACCESSIBILITY_ID, "test-Usuario")
+    passwordTextBox = (AppiumBy.ACCESSIBILITY_ID, "test-Contraseña")
+    loginBtn = (AppiumBy.ACCESSIBILITY_ID, "test-LOGIN")
+    dataIncorrectMsg = (AppiumBy.ACCESSIBILITY_ID, "test-Error")
 
-    def type_user(self):
-        self.wait_for_element(self.userTextBox)
-        self.find(self.userTextBox).send_keys("standard_user")
+    def type_user(self, usuario):
+        self.wait_for_element_to_be_visible(LoginPage.userTextBox)
+        username_input = self.find(LoginPage.userTextBox)
+        print(username_input.is_displayed())
+        username_input.send_keys(usuario)
 
-    def type_password(self):
-        self.wait_for_element(self.passwordTextBox)
-        self.find(self.passwordTextBox).send_keys("secret_sauce")
+    def type_password(self, contrasena):
+        self.wait_for_element_to_be_visible(LoginPage.passwordTextBox)
+        password_input = self.find(LoginPage.passwordTextBox)
+        print(password_input.is_displayed())
+        password_input.send_keys(contrasena)
 
-    def login(self):
-        self.type_user()
-        self.type_password()
-        self.wait_for_element(self.loginBtn)
-        self.find(self.loginBtn).click()
-        return
+    def tap_login_btn(self):
+        self.find(LoginPage.loginBtn).click()
 
+    def login(self, usuario, password):
+        self.type_user(usuario)
+        self.type_password(password)
+        self.tap_login_btn()
+        return ProductsPage(self.driver)
 
-    # userTextBox = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Usuario")
-    # passwordTextBox = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Contraseña")
-    # loginBtn = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-LOGIN")
-    # dataIncorrectMsg = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="test-Error")
+    def get_error_msg_text(self):
+        return self.find(LoginPage.dataIncorrectMsg).text
