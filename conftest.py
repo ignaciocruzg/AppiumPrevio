@@ -1,6 +1,5 @@
 import pytest
 from appium import webdriver
-from appium.webdriver.appium_service import AppiumService
 
 
 @pytest.fixture
@@ -9,9 +8,9 @@ def driver():
     desired_cap = {
         "platformName": "Android",
         "platformVersion": "13",
-        "appium:deviceName": "56295fdf",
-        "appium:appPackage": "com.swaglabsmobileapp",
-        "appium:appActivity": "com.swaglabsmobileapp.MainActivity"
+        "deviceName": "56295fdf",
+        "appPackage": "com.swaglabsmobileapp",
+        "appActivity": ".MainActivity"
     }
 
     url = "http://localhost:4723/wd/hub"
