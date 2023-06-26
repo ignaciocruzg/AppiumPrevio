@@ -7,6 +7,7 @@ from pages.LoginPage import LoginPage
 # @pytest.mark.usefixtures("appium_start")
 class TestLogin:
 
+    # Cargar archivo con datos de entrada
     load_dotenv("../AppiumPrevio/utilities/.env")
 
     @pytest.mark.happypath
@@ -25,7 +26,8 @@ class TestLogin:
         msj_error = os.getenv("MSG_ERROR_INCORRECT_CREDENTIALS")
         login_page = LoginPage(driver)
         login_page.login(username, password)
-        assert login_page.get_error_msg_text_incorrects_credentials() == msj_error
+        assert login_page.get_error_msg_text_incorrect_credentials() == \
+               msj_error
 
     @pytest.mark.exceptions
     def test_login_user_required(self, driver):
